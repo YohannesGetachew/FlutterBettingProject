@@ -1,0 +1,8 @@
+query FetchSports {
+    sports {
+      _id
+      id
+      name
+      order
+    }
+}

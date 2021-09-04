@@ -1,0 +1,24 @@
+{
+  "sports": [
+    {
+      "name": "Soccer",
+      "icon": "https://res.cloudinary.com/dtz77duv8/image/upload/v1603100364/soccer_1_vrzrwp.png",
+      "isAvailable": true
+    },
+    {
+      "name": "Basketball",
+      "icon": "https://res.cloudinary.com/dtz77duv8/image/upload/v1603100127/basketball_uoqgxq.png",
+      "isAvailable": false
+    },
+    {
+      "name": "Baseball",
+      "icon": "https://res.cloudinary.com/dtz77duv8/image/upload/v1603100142/baseball_adqfnb.png",
+      "isAvailable": false
+    },
+    {
+      "name": "Ice-Hockey",
+      "icon": "https://res.cloudinary.com/dtz77duv8/image/upload/v1603100095/hockey_vtxzps.png",
+      "isAvailable": false
+    }
+  ]
+}

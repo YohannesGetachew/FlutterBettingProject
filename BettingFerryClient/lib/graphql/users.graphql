@@ -1,0 +1,26 @@
+ query FetchUsers(
+    $firstName: String
+    $lastName: String
+    $username: String
+    $role: Role
+  ) {
+    users(
+      firstName: $firstName
+      lastName: $lastName
+      username: $username
+      role: $role
+    ) {
+      _id
+      firstName
+      lastName
+      username
+      isVerified
+      isActive
+      role
+      accountBalance
+      profileImage
+      createdAt
+      belongsToShop
+      cashierPermissions
+    }
+  }

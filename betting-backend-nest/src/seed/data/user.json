@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "firstName": "yohannes",
+      "lastName": "getachew",
+      "username": "0911111111",
+      "password": "superAdmin1",
+      "role": "SUPER-ADMIN"
+    },
+    {
+      "firstName": "george",
+      "lastName": "berhanu",
+      "username": "0923712644",
+      "password": "adminPass1",
+      "role": "ADMIN"
+    },
+    {
+      "firstName": "sinkumen",
+      "lastName": "assefa",
+      "username": "0912664949",
+      "password": "customerPass1",
+      "role": "CUSTOMER"
+    }
+  ]
+}

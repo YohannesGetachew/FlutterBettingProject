@@ -1,0 +1,621 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Advertisement {
+  id: String!
+  name: String
+  position: String!
+  imagePath: String!
+}
+
+type App {
+  _id: String
+  createdAt: String
+  updatedAt: String
+  appName: String!
+  appLogo: String!
+  currentTime: String!
+  maxWin: Float!
+  maxStake: Float!
+  minStake: Float!
+  withdrawalLimit: Float!
+  commissionRate: Float!
+  vatRate: Float!
+  bookmaker: Float!
+  advertisements: [Advertisement!]!
+  rules: String
+}
+
+type User {
+  _id: String
+  createdAt: String
+  updatedAt: String
+  firstName: String!
+  lastName: String!
+  username: String!
+  usernameType: UsernameType!
+  isVerified: Boolean!
+  isActive: Boolean!
+  isLocked: Boolean!
+  role: Role!
+  accountBalance: Float!
+  profileImage: String!
+  belongsToShop: String
+  cashierPermissions: [CashierPermission!]
+}
+
+enum UsernameType {
+  EMAIL
+  PHONE
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+  CUSTOMER
+  CASHIER
+}
+
+enum CashierPermission {
+  CREATE_DEPOSIT
+  CREATE_WITHDRAWAL
+  HANDLE_DEPOSIT_REQUEST
+  PLACE_TICKETS
+}
+
+type Location {
+  lat: Float!
+  lon: Float!
+}
+
+type Shop {
+  _id: String
+  createdAt: String
+  updatedAt: String
+  branchName: String!
+  isActive: Boolean!
+  admin: User!
+  contacts: [Contact!]
+  location: Location
+}
+
+type Contact {
+  type: String!
+  value: String!
+}
+
+type LoginResponse {
+  accessToken: String!
+  refreshToken: String!
+  tokenType: String
+  expiresIn: Float!
+}
+
+type RegisterResponse {
+  success: Boolean!
+  message: String!
+  id: String!
+}
+
+type DepositRequest {
+  _id: String
+  createdAt: String
+  updatedAt: String
+  requestId: String!
+  evidenceType: EvidenceType!
+  evidence: String!
+  customer: User!
+  transferSource: TransferSource!
+  confirmed: Boolean!
+  denied: Boolean!
+  transactionId: String
+}
+
+enum EvidenceType {
+  TRANSACTION_PICTURE
+  TRANSACTION_ID
+}
+
+enum TransferSource {
+  CBE
+  AMOLE
+  MBIRR
+  BANK
+}
+
+type Transaction {
+  _id: String
+  createdAt: String
+  updatedAt: String
+  type: TransactionType!
+  amount: Float!
+  customer: User!
+  cashier: User!
+  balanceAfterTransaction: Float!
+  shop: Shop!
+}
+
+enum TransactionType {
+  DEPOSIT
+  WITHDRAW
+}
+
+type Message {
+  _id: String
+  createdAt: String
+  updatedAt: String
+  messageHead: String!
+  messageBody: String!
+  isRead: Boolean!
+  customerId: String!
+}
+
+type Bet {
+  _id: String
+  createdAt: String
+  updatedAt: String
+  type: String!
+  value: String!
+  oddValue: Float!
+  fixtureId: String!
+  fixtureName: String!
+  betId: String!
+  status: Float
+  ticket: Ticket!
+}
+
+type Ticket {
+  _id: String
+  createdAt: String
+  updatedAt: String
+  stake: Float!
+  vatValue: Float!
+  totalOdds: Float!
+  ticketID: String!
+  isPlaced: Boolean!
+  placedDate: String
+  placementID: String
+  status: TicketStatus!
+  placerType: PlacerType!
+  userID: String
+  shopID: String
+  user: User
+  shop: Shop
+  bets: [Bet!]
+  isExpired: Boolean!
+  resolvedDate: String
+  paidDate: String
+  payer: User
+  payerID: String
+}
+
+enum TicketStatus {
+  PENDING
+  LOSE
+  WIN
+}
+
+enum PlacerType {
+  GUEST
+  CASHIER
+  CUSTOMER
+}
+
+type Country {
+  _id: ID!
+  createdAt: String
+  updatedAt: String
+  id: String!
+  name: String!
+  code: String
+  flag: String
+  order: Float
+  isAvailable: Boolean!
+  leagues: [League!]!
+}
+
+type Sport {
+  _id: ID!
+  createdAt: String
+  updatedAt: String
+  id: String
+  name: String!
+  icon: String
+  order: Float
+  isAvailable: Boolean!
+  fixtures: [Fixture!]!
+}
+
+type League {
+  _id: ID!
+  createdAt: String
+  updatedAt: String
+  id: String!
+  name: String!
+  type: String
+  logo: String
+  countryId: String!
+  country: Country!
+  sportId: String!
+  sport: Sport!
+  order: String
+  isAvailable: Boolean!
+  isTop: Boolean!
+  fixtures: [Fixture!]!
+}
+
+type Market {
+  _id: ID!
+  createdAt: String
+  updatedAt: String
+  id: String!
+  name: String!
+  order: Float
+  isAvailable: Boolean!
+}
+
+type Bets {
+  id: String
+  name: String
+  startPrice: Float
+  baseline: String
+  price: Float
+  status: Float
+  settlement: BetSettlement
+  lastUpdate: String
+}
+
+enum BetSettlement {
+  Cancelled
+  Loser
+  Winner
+  Refund
+  HalfLost
+  HalfWon
+}
+
+type Odd {
+  _id: ID!
+  createdAt: String
+  updatedAt: String
+  marketId: String!
+  market: Market
+  fixtureId: String!
+  fixture: Fixture!
+  bookmakerId: String!
+  bookmaker: String!
+  bets: [Bets!]
+}
+
+type BasicOdd {
+  odds: [Odd!]
+  more: Float!
+}
+
+type Scoreboard {
+  Status: String
+  Description: String
+  CurrentPeriod: Float
+  Time: String
+  Results: [Result!]
+}
+
+type Result {
+  Value: String
+  Position: String
+}
+
+type Incident {
+  Period: String
+  Seconds: String
+  IncidentType: IncidentType
+  ParticipantPosition: Float
+  PlayerName: String
+  Results: [Result!]
+}
+
+enum IncidentType {
+  Football_Corners
+  Football_Penalties
+  Football_Goal
+  Football_Own_goal
+  Football_Missed_penalty
+  Football_Penalty_goal
+  Football_Substitutions
+  Football_Red_cards
+  Football_Yellow_cards
+  Tennis_Aces
+  Tennis_Double_faults
+  Tennis_First_serve_wins
+  Basketball_Fouls
+  Basketball_Two_points
+  Basketball_Three_points
+  Basketball_Time_outs
+  Basketball_Free_throws
+  IceHockey_Penalties
+  Baseball_Hits
+}
+
+type Period {
+  Type: Float
+  IsConfirmed: Boolean
+  IsFinished: Boolean
+  Results: [Result!]
+  Incidents: [Incident!]
+}
+
+type StatisticsValue {
+  Value: String
+  Position: String
+}
+
+type Statistic {
+  Type: IncidentType
+  Value: StatisticsValue
+}
+
+type livescore {
+  Scoreboard: Scoreboard
+  Periods: [Period!]!
+  Statistics: [Statistic!]!
+}
+
+type LiveScore {
+  _id: ID!
+  createdAt: String
+  updatedAt: String
+  fixtureId: String!
+  score: livescore!
+}
+
+type Participant {
+  id: String
+  name: String
+  rotationId: Float
+  position: Float
+  isActive: Boolean
+}
+
+type Fixture {
+  _id: ID!
+  createdAt: String
+  updatedAt: String
+  id: String!
+  startDate: String!
+  status: ScoreboardStatus!
+  sportId: String!
+  sport: Sport!
+  leagueId: String!
+  league: League!
+  countryId: String!
+  country: Country!
+  participants: [Participant!]!
+  basicOdds: BasicOdd!
+  odds: [Odd!]
+  liveScore: LiveScore
+}
+
+enum ScoreboardStatus {
+  Not_started_yet
+  In_progress
+  Finished
+  Cancelled
+  Postponed
+  Interrupted
+  Abandoned
+  Coverage_lost
+  About_to_start
+}
+
+type ReportDetail {
+  date: String!
+  noPlayed: Float!
+  playedMoney: Float!
+  noWinners: Float!
+  wonMoney: Float!
+  balance: Float!
+  comission: Float!
+}
+
+type Bookmaker {
+  _id: ID!
+  createdAt: String
+  updatedAt: String
+  id: String
+  name: String
+}
+
+type Query {
+  users(firstName: String, lastName: String, username: String, role: Role): [User!]!
+  user(id: String!): User!
+  shops: [Shop!]!
+  shop(id: String!): Shop!
+  whoami: User!
+  isUserExists(phoneNumber: String!): User!
+  depositRequests: [DepositRequest!]!
+  transactions(customerUsername: String, cashierUsername: String, type: TransactionType, from: String, to: String): [Transaction!]!
+  messages: [Message!]!
+  tickets(date: String, isPlaced: Boolean, isExpired: Boolean = false, userID: String, status: String, placerType: String): [Ticket!]!
+  ticket(id: String!): Ticket!
+  report(from: String, to: String): [ReportDetail!]!
+  checkTicket(placementId: String!): Ticket!
+  bets: [Bet!]!
+  app: App!
+  bookmakers: [Bookmaker!]!
+  countries: [Country!]!
+  country(id: String!): Country!
+  fixtures(isAvailable: Boolean, leagueId: String, id: String, sportId: String, status: ScoreboardStatus = Not_started_yet): [Fixture!]!
+  fixture(id: String!): Fixture
+  leagues(isTop: Boolean, isAvailable: Boolean, countryId: String, sportId: String): [League!]!
+  league(id: String!): League!
+  markets: [Market!]!
+  odds(fixtureId: String): [Odd!]!
+  odd(id: String!): Odd!
+  sports: [Sport!]!
+  sport(id: String!): Sport!
+}
+
+type Mutation {
+  updateUser(updateInput: UserUpdateDTO!, id: String!): User!
+  updateProfileImage(image: String!, id: String!): User!
+  changeUserActive(id: String!): String!
+  createShop(shopInput: ShopDto!): Shop!
+  updateShop(shopInput: UpdateShopDTO!, id: String!): Shop!
+  login(loginInput: LoginDto!): LoginResponse!
+  register(userInput: UserDto!): RegisterResponse!
+  verify(accessToken: String!, id: String!): User!
+  resetPassword(accessToken: String!, password: String!, id: String!): User!
+  createDepositRequest(depositRequestInput: DepositRequestDto!): DepositRequest!
+  confirmDepositRequest(updateDepositRequestInput: UpdateDepositRequestDto!, id: String!): DepositRequest!
+  denyDepositRequest(id: String!): DepositRequest!
+  deleteDepositRequest(id: String!): String!
+  makeTransaction(transaction: TransactionDTO!): Transaction!
+  updateMessage(id: String!): Message!
+  duplicateTicket(stake: Float!, id: String!): Ticket!
+  payWonTicket(id: String!): Ticket!
+  saveTicket(input: TicketDTO!): Ticket!
+  placeTicket(input: TicketDTO!): Ticket!
+  updateTicket(updateInput: UpdateTicketDTO!, id: String!): Ticket!
+  updateApp(appInput: AppDto!, id: String!): App!
+  updateAdvertisement(adInput: AdvertisementDTO!, id: String!): App!
+  uploadFile(file: Upload!): String!
+  updateCountry(updateInput: CountryDTO!, id: String!): Country!
+  updateFixture(updateInput: FixtureDTO!, id: String!): Fixture!
+  updateLeague(updateInput: LeagueDTO!, id: String!): League!
+  updateMarket(updateInput: MarketDTO!, id: String!): Market!
+  updateSport(updateInput: SportDTO!, id: String!): Sport!
+}
+
+input UserUpdateDTO {
+  firstName: String
+  lastName: String
+  username: String
+  role: Role
+  password: String
+  belongsToShop: String
+  cashierPermissions: [CashierPermission!]
+}
+
+input ShopDto {
+  branchName: String!
+  isActive: Boolean = true
+  adminId: String!
+  contacts: [ContactDTO!]
+  location: LocationDTO
+}
+
+input ContactDTO {
+  type: String!
+  value: String!
+}
+
+input LocationDTO {
+  lat: Float!
+  lon: Float!
+}
+
+input UpdateShopDTO {
+  branchName: String
+  isActive: Boolean = true
+  adminId: String
+  contacts: [ContactDTO!]
+  location: LocationDTO
+}
+
+input LoginDto {
+  username: String!
+  password: String!
+}
+
+input UserDto {
+  firstName: String!
+  lastName: String!
+  username: String!
+  role: Role
+  password: String!
+  belongsToShop: String
+  cashierPermissions: [CashierPermission!]
+}
+
+input DepositRequestDto {
+  evidenceType: EvidenceType!
+  evidence: String!
+  transferSource: String!
+}
+
+input UpdateDepositRequestDto {
+  amount: Float!
+}
+
+input TransactionDTO {
+  type: TransactionType!
+  amount: Float!
+  customer: String!
+}
+
+input TicketDTO {
+  stake: Float!
+  bets: [BetDTO!]!
+}
+
+input BetDTO {
+  betId: String!
+  type: String!
+  value: String!
+  fixtureName: String!
+  oddValue: Float!
+  fixtureId: String!
+}
+
+input UpdateTicketDTO {
+  isPlaced: Boolean = true
+  stake: Float
+}
+
+input AppDto {
+  appName: String
+  appLogo: String
+  maxWin: Float
+  maxStake: Float
+  minStake: Float
+  withdrawalLimit: Float
+  rules: String
+  advertisements: [AdvertisementDTO!]
+  commissionRate: Float
+  vatRate: Float
+  bookmaker: Float
+}
+
+input AdvertisementDTO {
+  id: String
+  name: String
+  position: String = "Header"
+  imagePath: String!
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+input CountryDTO {
+  isAvailable: Boolean
+  order: Float
+}
+
+input FixtureDTO {
+  isAvailable: Boolean!
+}
+
+input LeagueDTO {
+  isAvailable: Boolean
+  isTop: Boolean
+}
+
+input MarketDTO {
+  isAvailable: Boolean!
+}
+
+input SportDTO {
+  isAvailable: Boolean!
+  order: Float
+}

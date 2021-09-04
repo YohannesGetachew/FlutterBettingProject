@@ -1,0 +1,100 @@
+syntax = "proto3";
+
+package Live;
+
+service LiveService {
+  rpc sendNewFixture(Fixture) returns (Response) {}
+  rpc sendNewOdd(Odd) returns (Response) {}
+  rpc sendLiveScore(LiveScore) returns (Response) {}
+}
+
+
+message Response {
+  bool isOk = 1;
+}
+message Participant {
+  string id = 1;
+  string name = 2;
+  int32 rotationId = 3;
+  int32 position = 4; // in 2-participant events 1 - home and 2 - away
+  /**
+   * Will only show in outright events.
+   * False if the participant is no longer active. For example: When a horse is set as non-runner
+   */
+  bool isActive = 5;
+}
+
+message Fixture {
+  string id = 1;
+  string startDate = 2;
+  int32 status = 3;
+  string sportId = 4;
+  string leagueId = 5;
+  string countryId = 6;
+  repeated Participant participants = 7;
+}
+
+message Bet {
+  string id = 1;
+  string name = 2;
+  string startPrice = 3;
+  string baseline = 4;
+  string price = 5;
+  int32 status = 6;
+  int32 settlement = 7;
+  string lastUpdate = 8;
+}
+
+message Odd {
+  string id = 1;
+  string marketId = 2;
+  string fixtureId = 3;
+  string bookmakerId = 4;
+  repeated Bet bets = 5;
+}
+
+
+// liveScore
+message Result {
+  string Value = 1;
+  string Position = 2;
+}
+message Incident {
+  string Period = 1;
+  string Seconds = 2;
+  int32 IncidentType = 3;
+  int32 ParticipantPosition = 4;
+  string PlayerName = 5;
+  Result Results = 6;
+}
+message ScoreBoard {
+  string Status = 1;
+  string Description = 2;
+  string CurrentPeriod = 3;
+  string Time = 4;
+  Result results = 5;
+}
+message Period {
+  int32 Type = 1;
+  bool IsConfirmed = 2;
+  bool IsFinished = 3;
+  repeated Result results = 4;
+}
+message StatisticsValue {
+  string Value = 1;
+  string Position = 2;
+}
+message Statistic {
+  int32 Type = 1;
+  StatisticsValue Value = 2;
+}
+message Score {
+  ScoreBoard Scoreboard = 1;
+  repeated Period Periods = 2;
+  repeated Statistic Statistics = 3;
+}
+
+message LiveScore {
+  string fixtureId = 1;
+  Score score = 2;
+}

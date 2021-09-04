@@ -1,0 +1,14 @@
+{
+  "app": {
+    "appName": "GeneralBet",
+    "appLogo": "https://res.cloudinary.com/dtz77duv8/image/upload/v1604746758/new_birrbet_logo_wpmm19.png",
+    "bookmaker": 8,
+    "withdrawalLimit": 1000,
+    "minStake": 30,
+    "maxStake": 1000,
+    "maxWin": 200000,
+    "commissionRate": 0.15,
+    "vatRate": 0.15,
+    "rules": ""
+  }
+}
