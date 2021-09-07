@@ -14,4 +14,6 @@
 
 initially refactor code
 
-1. create a repository class for each the api calls
+- remove unwanted dependences
+
+1. make helper functions for the repositores (e.g. casting and changing to lis)

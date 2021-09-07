@@ -1,0 +1,3 @@
+package_name: BettingMobileFlutter
+graphql_endpoint: http://localhost:9852/graphql
+models_directory_path: lib/data/model/

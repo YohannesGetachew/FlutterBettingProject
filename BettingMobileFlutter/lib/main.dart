@@ -1,10 +1,18 @@
-import 'package:BettingMobileFlutter/widgets/screens/Ticket/tickets.dart';
-import 'package:BettingMobileFlutter/widgets/screens/login/login.dart';
+import 'package:BettingMobileFlutter/business_logic/sport/blocSport.dart';
+import 'package:BettingMobileFlutter/business_logic/sport/sport.dart';
+import 'package:BettingMobileFlutter/config/graphqlConfig.dart';
+import 'package:BettingMobileFlutter/data/graphql/sport.dart';
+import 'package:BettingMobileFlutter/data/graphql/user.dart';
+import 'package:BettingMobileFlutter/widgets/screens/registration/registration.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:BettingFerryClient/BettingFerryClient.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
-  // GetIt.instance.registerSingleton(initClient('http://10.0.2.2:9852/graphql'));
-  runApp(Login());
+void main() async {
+  GraphQLConfig();
+  print('configured');
+  runApp(BlocProvider<SportBloc>(
+    create: (BuildContext context) =>
+        SportBloc()..add(FetchSportData(getUsersQuery)),
+    child: Registration(),
+  ));
 }

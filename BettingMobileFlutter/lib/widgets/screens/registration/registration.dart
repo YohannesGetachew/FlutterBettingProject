@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../layout/applicationBar.dart';
 import '../../layout/bottomNavigationBar.dart';
 
-
 class Registration extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

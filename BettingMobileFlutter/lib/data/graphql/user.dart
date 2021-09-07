@@ -1,4 +1,5 @@
- query FetchUsers(
+String getUsersQuery = r'''
+query GetUsers(
     $firstName: String
     $lastName: String
     $username: String
@@ -16,11 +17,14 @@
       username
       isVerified
       isActive
-      role
-      accountBalance
       profileImage
       createdAt
+      updatedAt
       belongsToShop
       cashierPermissions
+      role
+      usernameType
+      accountBalance
     }
   }
+''';
