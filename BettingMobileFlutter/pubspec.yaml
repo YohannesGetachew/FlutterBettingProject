@@ -30,6 +30,7 @@ dependencies:
   bloc: ^3.0.0
   flutter_bloc: ^3.2.0
   json_serializable: ^3.5.1
+  provider: ^4.3.3
 
   # ferry: ^0.8.0
   # gql_http_link: ^0.3.2

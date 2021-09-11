@@ -37,8 +37,9 @@ class UserRepository {
     final loggedInDataRaw = await userProvider
         .login(<String, dynamic>{'username': username, 'password': password});
     if (loggedInDataRaw.hasException) {
-      return BaseResponse.handleResponseErrors(loggedInDataRaw,
-          customErrorMessage: 'Error logging in');
+      // return BaseResponse.handleResponseErrors(loggedInDataRaw,
+      //     customErrorMessage: 'Error logging in');
+      throw Exception('Failed to login');
     }
 
     final BaseResponse userExistResponse =

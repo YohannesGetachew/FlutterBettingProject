@@ -12,6 +12,10 @@ class Loading extends UserState {
   Loading() : super();
 }
 
+class Initial extends UserState {
+  Initial() : super();
+}
+
 class LoadDataSuccess extends UserState {
   final Auth authData;
 

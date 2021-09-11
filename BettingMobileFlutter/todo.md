@@ -25,24 +25,47 @@ initially refactor code
 - ticket bet slip line
 - ticket text input border color
 
-
-
 Group members
-1.	Name Yohannes Getachew
-               ID ATR/8465/09 (ADD)
-Project Title: Sports betting application
-Feature’s list
-Client
-1.	Placing a ticket
-2.	Saving a ticket
-3.	Viewing profile
-4.	Viewing tickets
-5.	Deleting ticket history
-6.	Registering
-7.	Logging in
-Admin
-1.	Creating and managing users
-2.	Logging in
-3.	Placing client ticket
-4.	Viewing client ticket
 
+1. Name Yohannes Getachew
+   ID ATR/8465/09 (ADD)
+   Project Title: Sports betting application
+   Feature’s list
+   Client
+1. Placing a ticket
+1. Saving a ticket
+1. Viewing profile
+1. Viewing tickets
+1. Deleting ticket history
+1. Registering
+1. Logging in
+   Admin
+1. Creating and managing users
+1. Logging in
+1. Placing client ticket
+1. Viewing client ticket
+
+To implement
+
+1. navigation
+
+Bloc
+
+- initializing
+- updating
+- reading
+
+Navigation
+
+- working with blov during navigation
+- navigation pop
+
+Testing
+
+- testing bloc
+
+user persistance
+
+readme according to betsegaw
+to include
+bloc without and with equitable

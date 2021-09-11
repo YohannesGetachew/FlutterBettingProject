@@ -24,9 +24,15 @@ class CustomTextField extends StatefulWidget {
   final String hintText;
   final String label;
   final fieldTypes fieldType;
+  final handleChange;
   final onSaved;
 
-  CustomTextField({this.hintText, this.label, this.fieldType, this.onSaved});
+  CustomTextField(
+      {this.hintText,
+      this.label,
+      this.fieldType,
+      this.handleChange,
+      this.onSaved});
 
   @override
   _CustomTextFieldState createState() => _CustomTextFieldState();
@@ -56,10 +62,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
               : null),
       keyboardType: getKeyboardType(widget.fieldType),
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      onSaved: widget.onSaved,
       obscureText:
           widget.fieldType == fieldTypes.PASSWORD ? dontShowPassword : false,
       validator: validateFieldValue(),
+      onChanged: (value) => widget.handleChange(value),
+      onSaved: widget.onSaved,
     );
   }
 

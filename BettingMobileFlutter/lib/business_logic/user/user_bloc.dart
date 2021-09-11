@@ -15,7 +15,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   @override
-  UserState get initialState => Loading();
+  UserState get initialState => Initial();
 
   @override
   Stream<UserState> mapEventToState(UserEvent event) async* {
@@ -28,7 +28,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     try {
       final BaseResponse loginResult = await repository.login(
           username: event.username, password: event.password);
-      print(loginResult.data.user.firstName);
+      print(loginResult);
       if (loginResult.hasException) {
         yield LoadDataFail(loginResult.customError);
       } else if (loginResult.data.user.role != 'CUSTOMER') {

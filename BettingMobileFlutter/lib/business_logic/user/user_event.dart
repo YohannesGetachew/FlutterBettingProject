@@ -1,4 +1,3 @@
-import 'package:BettingMobileFlutter/data/model/auth.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class UserEvent extends Equatable {

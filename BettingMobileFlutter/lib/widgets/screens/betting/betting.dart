@@ -16,53 +16,35 @@ class Betting extends StatelessWidget {
   }
 
   Widget build(BuildContext context) {
-    return BlocBuilder<UserBloc, UserState>(
-      builder: (BuildContext context, UserState state) {
-        if (state is Loading) {
-          return Scaffold(
-            // appBar: _buildAppBar(),
-            body: LinearProgressIndicator(),
-          );
-        } else if (state is LoadDataFail) {
-          return Scaffold(
-            // appBar: _buildAppBar(),
-            body: Center(child: Text(state.error)),
-          );
-        } else {
-          // data = (state as LoadDataSuccess).authData;
-          return SingleChildScrollView(
-              child: Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Column(
-                    children: [
-                      Padding(padding: EdgeInsets.all(10.0)),
-                      Text(
-                        'Matches',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 30.0),
-                      ),
-                      Padding(padding: EdgeInsets.all(10.0)),
-                      match(),
-                      Padding(padding: EdgeInsets.all(10.0)),
-                      match(),
-                      Padding(padding: EdgeInsets.all(10.0)),
-                      match(),
-                      Padding(padding: EdgeInsets.all(10.0)),
-                      match(),
-                      Padding(padding: EdgeInsets.all(10.0)),
-                      match(),
-                      Padding(padding: EdgeInsets.all(10.0)),
-                      match(),
-                      Padding(padding: EdgeInsets.all(10.0)),
-                      match(),
-                      Padding(padding: EdgeInsets.all(10.0)),
-                      match(),
-                      Padding(padding: EdgeInsets.all(10.0)),
-                      match(),
-                    ],
-                  )));
-        }
-      },
-    );
+    return SingleChildScrollView(
+        child: Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                Padding(padding: EdgeInsets.all(10.0)),
+                Text(
+                  'Matches',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+                ),
+                Padding(padding: EdgeInsets.all(10.0)),
+                match(),
+                Padding(padding: EdgeInsets.all(10.0)),
+                match(),
+                Padding(padding: EdgeInsets.all(10.0)),
+                match(),
+                Padding(padding: EdgeInsets.all(10.0)),
+                match(),
+                Padding(padding: EdgeInsets.all(10.0)),
+                match(),
+                Padding(padding: EdgeInsets.all(10.0)),
+                match(),
+                Padding(padding: EdgeInsets.all(10.0)),
+                match(),
+                Padding(padding: EdgeInsets.all(10.0)),
+                match(),
+                Padding(padding: EdgeInsets.all(10.0)),
+                match(),
+              ],
+            )));
   }
 }
