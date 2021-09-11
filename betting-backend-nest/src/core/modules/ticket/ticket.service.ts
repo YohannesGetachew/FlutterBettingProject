@@ -74,7 +74,8 @@ export class TicketService extends BaseService<Ticket> {
         const betStatusCorrected = bets
           .map((bet) => bet.status)
           .filter((status) => status);
-        if (betStatusCorrected.length === bets.length) {
+          // betStatusCorrected.length === bets.length
+        if (true) {
           // ticket status must change now
           // is the ticket placed by customer increment it to customers account balance
           const newStatus = {

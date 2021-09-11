@@ -18,7 +18,7 @@ import { SeedModule } from './seed/seed.module';
 // import {LiveModule} from "./Live/Live.module";
 @Module({
   imports: [
-   // JobsModule,
+   JobsModule,
     DatabaseModule,
     GraphqlModule,
     MongooseModule.forFeature([{ name: App.name, schema: AppSchema }]),

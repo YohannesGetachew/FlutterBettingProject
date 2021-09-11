@@ -2,31 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Advertisement {
-  id: String!
-  name: String
-  position: String!
-  imagePath: String!
-}
-
-type App {
-  _id: String
-  createdAt: String
-  updatedAt: String
-  appName: String!
-  appLogo: String!
-  currentTime: String!
-  maxWin: Float!
-  maxStake: Float!
-  minStake: Float!
-  withdrawalLimit: Float!
-  commissionRate: Float!
-  vatRate: Float!
-  bookmaker: Float!
-  advertisements: [Advertisement!]!
-  rules: String
-}
-
 type User {
   _id: String
   createdAt: String
@@ -85,72 +60,6 @@ type Contact {
   value: String!
 }
 
-type LoginResponse {
-  accessToken: String!
-  refreshToken: String!
-  tokenType: String
-  expiresIn: Float!
-}
-
-type RegisterResponse {
-  success: Boolean!
-  message: String!
-  id: String!
-}
-
-type DepositRequest {
-  _id: String
-  createdAt: String
-  updatedAt: String
-  requestId: String!
-  evidenceType: EvidenceType!
-  evidence: String!
-  customer: User!
-  transferSource: TransferSource!
-  confirmed: Boolean!
-  denied: Boolean!
-  transactionId: String
-}
-
-enum EvidenceType {
-  TRANSACTION_PICTURE
-  TRANSACTION_ID
-}
-
-enum TransferSource {
-  CBE
-  AMOLE
-  MBIRR
-  BANK
-}
-
-type Transaction {
-  _id: String
-  createdAt: String
-  updatedAt: String
-  type: TransactionType!
-  amount: Float!
-  customer: User!
-  cashier: User!
-  balanceAfterTransaction: Float!
-  shop: Shop!
-}
-
-enum TransactionType {
-  DEPOSIT
-  WITHDRAW
-}
-
-type Message {
-  _id: String
-  createdAt: String
-  updatedAt: String
-  messageHead: String!
-  messageBody: String!
-  isRead: Boolean!
-  customerId: String!
-}
-
 type Bet {
   _id: String
   createdAt: String
@@ -200,6 +109,31 @@ enum PlacerType {
   GUEST
   CASHIER
   CUSTOMER
+}
+
+type Advertisement {
+  id: String!
+  name: String
+  position: String!
+  imagePath: String!
+}
+
+type App {
+  _id: String
+  createdAt: String
+  updatedAt: String
+  appName: String!
+  appLogo: String!
+  currentTime: String!
+  maxWin: Float!
+  maxStake: Float!
+  minStake: Float!
+  withdrawalLimit: Float!
+  commissionRate: Float!
+  vatRate: Float!
+  bookmaker: Float!
+  advertisements: [Advertisement!]!
+  rules: String
 }
 
 type Country {
@@ -408,6 +342,33 @@ enum ScoreboardStatus {
   About_to_start
 }
 
+type Transaction {
+  _id: String
+  createdAt: String
+  updatedAt: String
+  type: TransactionType!
+  amount: Float!
+  customer: User!
+  cashier: User!
+  balanceAfterTransaction: Float!
+  shop: Shop!
+}
+
+enum TransactionType {
+  DEPOSIT
+  WITHDRAW
+}
+
+type Message {
+  _id: String
+  createdAt: String
+  updatedAt: String
+  messageHead: String!
+  messageBody: String!
+  isRead: Boolean!
+  customerId: String!
+}
+
 type ReportDetail {
   date: String!
   noPlayed: Float!
@@ -426,21 +387,60 @@ type Bookmaker {
   name: String
 }
 
+type LoginResponse {
+  accessToken: String!
+  refreshToken: String!
+  tokenType: String
+  expiresIn: Float!
+}
+
+type RegisterResponse {
+  success: Boolean!
+  message: String!
+  id: String!
+}
+
+type DepositRequest {
+  _id: String
+  createdAt: String
+  updatedAt: String
+  requestId: String!
+  evidenceType: EvidenceType!
+  evidence: String!
+  customer: User!
+  transferSource: TransferSource!
+  confirmed: Boolean!
+  denied: Boolean!
+  transactionId: String
+}
+
+enum EvidenceType {
+  TRANSACTION_PICTURE
+  TRANSACTION_ID
+}
+
+enum TransferSource {
+  CBE
+  AMOLE
+  MBIRR
+  BANK
+}
+
 type Query {
-  users(firstName: String, lastName: String, username: String, role: Role): [User!]!
-  user(id: String!): User!
-  shops: [Shop!]!
-  shop(id: String!): Shop!
-  whoami: User!
-  isUserExists(phoneNumber: String!): User!
-  depositRequests: [DepositRequest!]!
-  transactions(customerUsername: String, cashierUsername: String, type: TransactionType, from: String, to: String): [Transaction!]!
-  messages: [Message!]!
   tickets(date: String, isPlaced: Boolean, isExpired: Boolean = false, userID: String, status: String, placerType: String): [Ticket!]!
   ticket(id: String!): Ticket!
   report(from: String, to: String): [ReportDetail!]!
   checkTicket(placementId: String!): Ticket!
   bets: [Bet!]!
+  shops: [Shop!]!
+  shop(id: String!): Shop!
+  users(firstName: String, lastName: String, username: String, role: Role): [User!]!
+  user(id: String!): User!
+  messages: [Message!]!
+  whoami: User!
+  isUserExists(phoneNumber: String!): User!
+  depositRequests: [DepositRequest!]!
+  transactions(customerUsername: String, cashierUsername: String, type: TransactionType, from: String, to: String): [Transaction!]!
   app: App!
   bookmakers: [Bookmaker!]!
   countries: [Country!]!
@@ -457,11 +457,17 @@ type Query {
 }
 
 type Mutation {
+  duplicateTicket(stake: Float!, id: String!): Ticket!
+  payWonTicket(id: String!): Ticket!
+  saveTicket(input: TicketDTO!): Ticket!
+  placeTicket(input: TicketDTO!): Ticket!
+  updateTicket(updateInput: UpdateTicketDTO!, id: String!): Ticket!
+  createShop(shopInput: ShopDto!): Shop!
+  updateShop(shopInput: UpdateShopDTO!, id: String!): Shop!
   updateUser(updateInput: UserUpdateDTO!, id: String!): User!
   updateProfileImage(image: String!, id: String!): User!
   changeUserActive(id: String!): String!
-  createShop(shopInput: ShopDto!): Shop!
-  updateShop(shopInput: UpdateShopDTO!, id: String!): Shop!
+  updateMessage(id: String!): Message!
   login(loginInput: LoginDto!): LoginResponse!
   register(userInput: UserDto!): RegisterResponse!
   verify(accessToken: String!, id: String!): User!
@@ -471,12 +477,6 @@ type Mutation {
   denyDepositRequest(id: String!): DepositRequest!
   deleteDepositRequest(id: String!): String!
   makeTransaction(transaction: TransactionDTO!): Transaction!
-  updateMessage(id: String!): Message!
-  duplicateTicket(stake: Float!, id: String!): Ticket!
-  payWonTicket(id: String!): Ticket!
-  saveTicket(input: TicketDTO!): Ticket!
-  placeTicket(input: TicketDTO!): Ticket!
-  updateTicket(updateInput: UpdateTicketDTO!, id: String!): Ticket!
   updateApp(appInput: AppDto!, id: String!): App!
   updateAdvertisement(adInput: AdvertisementDTO!, id: String!): App!
   uploadFile(file: Upload!): String!
@@ -487,14 +487,23 @@ type Mutation {
   updateSport(updateInput: SportDTO!, id: String!): Sport!
 }
 
-input UserUpdateDTO {
-  firstName: String
-  lastName: String
-  username: String
-  role: Role
-  password: String
-  belongsToShop: String
-  cashierPermissions: [CashierPermission!]
+input TicketDTO {
+  stake: Float!
+  bets: [BetDTO!]!
+}
+
+input BetDTO {
+  betId: String!
+  type: String!
+  value: String!
+  fixtureName: String!
+  oddValue: Float!
+  fixtureId: String!
+}
+
+input UpdateTicketDTO {
+  isPlaced: Boolean = true
+  stake: Float
 }
 
 input ShopDto {
@@ -521,6 +530,16 @@ input UpdateShopDTO {
   adminId: String
   contacts: [ContactDTO!]
   location: LocationDTO
+}
+
+input UserUpdateDTO {
+  firstName: String
+  lastName: String
+  username: String
+  role: Role
+  password: String
+  belongsToShop: String
+  cashierPermissions: [CashierPermission!]
 }
 
 input LoginDto {
@@ -552,25 +571,6 @@ input TransactionDTO {
   type: TransactionType!
   amount: Float!
   customer: String!
-}
-
-input TicketDTO {
-  stake: Float!
-  bets: [BetDTO!]!
-}
-
-input BetDTO {
-  betId: String!
-  type: String!
-  value: String!
-  fixtureName: String!
-  oddValue: Float!
-  fixtureId: String!
-}
-
-input UpdateTicketDTO {
-  isPlaced: Boolean = true
-  stake: Float
 }
 
 input AppDto {

@@ -12,7 +12,7 @@ export class JobService {
    // this.clearOldTickets();
   }
 
-  @Cron(CronExpression.EVERY_10_MINUTES)
+  @Cron(CronExpression.EVERY_10_SECONDS)
   async updateTicketStatus() {
     // all placed tickets
     this.ticketService.findAll({status: TicketStatus.PENDING, isPlaced: true}).then((tickets) => {
